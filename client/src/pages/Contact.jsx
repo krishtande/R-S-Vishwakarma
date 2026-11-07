@@ -42,19 +42,19 @@ const Contact = () => {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px] -z-10"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -z-10"></div>
       
-      <div className="container mx-auto px-6 md:px-12 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
-          <h4 className="text-accent font-bold tracking-[0.2em] uppercase text-sm mb-4">Let's Connect</h4>
-          <h1 className="text-5xl md:text-6xl font-heading font-bold text-dark mb-6">Get In Touch</h1>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg font-light">Have a custom requirement or a question about our collections? We would love to hear from you. Our master craftsmen are ready to bring your vision to life.</p>
+          <h4 className="text-accent font-bold tracking-[0.2em] uppercase text-xs sm:text-sm mb-2 sm:mb-4">Let's Connect</h4>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-heading font-bold text-dark mb-4 sm:mb-6">Get In Touch</h1>
+          <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-lg font-light leading-relaxed">Have a custom requirement or a question about our collections? We would love to hear from you. Our master craftsmen are ready to bring your vision to life.</p>
         </motion.div>
 
         {/* Contact Info Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 mb-12 sm:mb-16">
           {contactCards.map((card, index) => (
             <motion.a 
               key={index}
@@ -64,40 +64,45 @@ const Contact = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ y: -10 }}
-              className="bg-white p-8 rounded-3xl shadow-xl shadow-gray-200/50 border border-white flex flex-col items-center text-center group transition-all duration-300 cursor-pointer hover:shadow-2xl hover:border-accent/30"
+              whileHover={{ y: -6 }}
+              className="bg-white p-5 sm:p-8 rounded-2xl sm:rounded-3xl shadow-lg shadow-gray-200/50 border border-white flex flex-col items-center text-center group transition-all duration-300 cursor-pointer hover:shadow-xl hover:border-accent/30"
             >
-              <div className="w-16 h-16 bg-bg rounded-2xl flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-500 shadow-sm">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-bg rounded-xl sm:rounded-2xl flex items-center justify-center text-accent mb-4 sm:mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-500 shadow-sm">
                 {card.icon}
               </div>
-              <h3 className="text-2xl font-heading font-bold text-dark mb-4">{card.title}</h3>
-              <p className="text-gray-500 whitespace-pre-line leading-relaxed group-hover:text-dark transition-colors">{card.desc}</p>
+              <h3 className="text-xl sm:text-2xl font-heading font-bold text-dark mb-2 sm:mb-4">{card.title}</h3>
+              <p className="text-gray-500 text-xs sm:text-sm whitespace-pre-line leading-relaxed group-hover:text-dark transition-colors">{card.desc}</p>
             </motion.a>
           ))}
         </div>
         
         {/* Contact Form Section */}
-        <div className="flex flex-col lg:flex-row gap-12 bg-white/70 backdrop-blur-2xl rounded-[3rem] shadow-2xl shadow-primary/5 overflow-hidden border border-white/60">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 bg-white/80 backdrop-blur-2xl rounded-2xl sm:rounded-3xl lg:rounded-[3rem] shadow-2xl shadow-primary/5 overflow-hidden border border-white/60">
           
-          <div className="w-full lg:w-2/5 relative min-h-[400px]">
+          <div className="w-full lg:w-2/5 relative min-h-[280px] sm:min-h-[350px] lg:min-h-[400px]">
              {/* Map Placeholder or Beautiful Image */}
              <div className="absolute inset-0">
                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Showroom" className="w-full h-full object-cover" />
-               <div className="absolute inset-0 bg-gradient-to-r from-dark/80 to-dark/40"></div>
+               <div className="absolute inset-0 bg-gradient-to-r from-dark/85 to-dark/50"></div>
              </div>
             
-            <div className="relative z-10 p-12 flex flex-col h-full justify-end text-white">
-              <h3 className="text-3xl font-heading font-bold mb-4 drop-shadow-md text-white">Visit Our Showroom</h3>
-              <p className="text-gray-200 font-light leading-relaxed max-w-sm mb-8 drop-shadow-md">
-                Experience the texture, smell the rich oak, and see the masterful joints up close. A picture speaks a thousand words, but feeling is believing.
+            <div className="relative z-10 p-6 sm:p-10 lg:p-12 flex flex-col h-full justify-end text-white">
+              <h3 className="text-2xl sm:text-3xl font-heading font-bold mb-2 sm:mb-4 drop-shadow-md text-white">Visit Our Workshop</h3>
+              <p className="text-gray-200 text-xs sm:text-sm font-light leading-relaxed max-w-sm mb-6 drop-shadow-md">
+                Experience the texture, smell the rich teak wood, and see the masterful joints up close. A picture speaks a thousand words, but feeling is believing.
               </p>
-              <button className="bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white hover:text-dark text-white w-max px-8 py-3 rounded-full text-sm font-bold tracking-widest uppercase transition-all duration-500 shadow-lg">
+              <a 
+                href="https://www.google.com/maps/search/?api=1&query=Survey+No.311/2,+Nr.+Madhav+Homes+%26+Nr.+Small+Under+Pass,+Sardar+Patel+Ring+Rd,+Zundal,+Gujarat+382424" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white hover:text-dark text-white w-max px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-500 shadow-lg"
+              >
                 Get Directions
-              </button>
+              </a>
             </div>
           </div>
           
-          <div className="w-full lg:w-3/5 p-10 lg:p-16">
+          <div className="w-full lg:w-3/5 p-6 sm:p-10 lg:p-16">
             <h3 className="text-3xl font-heading font-bold text-dark mb-2">Send a Message</h3>
             <p className="text-gray-500 mb-8 font-light">Fill out the form below and our team will get back to you within 24 hours.</p>
             

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowRight, ShoppingBag, Search, Filter, X, Eye, SlidersHorizontal } from 'lucide-react';
+import { ArrowRight, ShoppingBag, Search, Filter, X, Eye, SlidersHorizontal, MessageCircle } from 'lucide-react';
 import TiltCard from '../components/ui/TiltCard';
 
 const getRelativeUrl = (url) => {
@@ -334,44 +334,85 @@ const Products = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1, duration: 0.8 }}
                       whileHover={{ y: -8 }}
-                      className="group relative bg-bg rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 border border-white hover:border-accent/20 flex flex-col h-full"
+                      className="group relative bg-bg rounded-3xl md:rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 border border-white hover:border-accent/20 flex flex-col h-full"
                     >
-                      <div className="relative h-[380px] overflow-hidden">
+                      {/* Product Image */}
+                      <div 
+                        onClick={() => setQuickViewProduct(product)}
+                        className="relative h-[260px] sm:h-[320px] md:h-[380px] overflow-hidden cursor-pointer"
+                      >
                         {product.images && product.images[0] ? (
                           <img src={getRelativeUrl(product.images[0])} alt={product.name} className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-gray-400 font-medium bg-gray-100">No Image</div>
                         )}
                         
-                        {/* Premium Glass Overlay on Hover */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-end pb-12 gap-4">
-                          <Link to={`/quote?product=${encodeURIComponent(product.name)}`} className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500 bg-white text-dark font-bold tracking-widest uppercase text-xs px-8 py-3 rounded-full hover:bg-accent hover:text-white shadow-xl">
+                        {/* Desktop Hover Overlay */}
+                        <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex-col items-center justify-end pb-12 gap-4">
+                          <Link 
+                            to={`/quote?product=${encodeURIComponent(product.name)}`} 
+                            onClick={(e) => e.stopPropagation()}
+                            className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500 bg-white text-dark font-bold tracking-widest uppercase text-xs px-8 py-3 rounded-full hover:bg-accent hover:text-white shadow-xl"
+                          >
                             Request Quote
                           </Link>
-                          <button onClick={() => setQuickViewProduct(product)} className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-75 bg-transparent border border-white/50 text-white font-bold tracking-widest uppercase text-xs px-8 py-3 rounded-full hover:bg-white/20 hover:border-white backdrop-blur-sm" title="Quick View">
+                          <button 
+                            onClick={(e) => { e.stopPropagation(); setQuickViewProduct(product); }} 
+                            className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-75 bg-transparent border border-white/50 text-white font-bold tracking-widest uppercase text-xs px-8 py-3 rounded-full hover:bg-white/20 hover:border-white backdrop-blur-sm" 
+                            title="Quick View"
+                          >
                             Quick View
                           </button>
                         </div>
 
                         {product.category && (
-                          <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-dark shadow-lg border border-white/50 uppercase tracking-widest">
+                          <div className="absolute top-4 left-4 md:top-6 md:left-6 bg-white/95 backdrop-blur-md px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold text-dark shadow-md border border-white/50 uppercase tracking-wider">
                             {product.category.name || 'Furniture'}
                           </div>
                         )}
                       </div>
                       
-                      <div className="p-8 flex flex-col flex-grow relative bg-white">
-                        <h3 className="text-2xl font-heading font-bold text-dark mb-3 leading-snug group-hover:text-primary transition-colors duration-300 truncate">{product.name}</h3>
-                        <p className="text-gray-500 text-sm mb-8 line-clamp-2 flex-grow leading-relaxed font-light">{product.description}</p>
+                      {/* Product Content */}
+                      <div className="p-5 sm:p-6 md:p-8 flex flex-col flex-grow relative bg-white">
+                        <h3 
+                          onClick={() => setQuickViewProduct(product)}
+                          className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-dark mb-2 leading-snug group-hover:text-primary transition-colors duration-300 truncate cursor-pointer"
+                        >
+                          {product.name}
+                        </h3>
+                        <p className="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6 line-clamp-2 flex-grow leading-relaxed font-light">{product.description}</p>
                         
-                        <div className="flex justify-between items-end mt-auto pt-4 border-t border-gray-100">
+                        <div className="flex justify-between items-end mt-auto pt-3 border-t border-gray-100">
                           <div>
-                            <p className="text-xs text-gray-400 uppercase tracking-[0.2em] font-bold mb-1">Starting at</p>
-                            <p className="text-dark font-heading font-bold text-2xl">₹{product.price?.toLocaleString() || 0}</p>
+                            <p className="text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest font-bold mb-0.5">Starting at</p>
+                            <p className="text-dark font-heading font-bold text-xl sm:text-2xl">₹{product.price?.toLocaleString() || 0}</p>
                           </div>
-                          <button onClick={() => setQuickViewProduct(product)} className="flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 text-gray-400 group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-sm">
-                            <Eye size={20} />
+                          
+                          <button 
+                            onClick={() => setQuickViewProduct(product)} 
+                            className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-200 text-gray-500 hover:border-accent hover:bg-accent hover:text-white transition-all shadow-sm"
+                            title="Quick View"
+                          >
+                            <Eye size={18} />
                           </button>
+                        </div>
+
+                        {/* Direct Mobile Action Buttons */}
+                        <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-gray-100">
+                          <a
+                            href={`https://wa.me/918808728154?text=${encodeURIComponent(`Hello! I want to inquire about "${product.name}" (₹${product.price?.toLocaleString() || 0}) from R.S. Vishwakarma & Co.`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-1.5 bg-green-50 hover:bg-green-100 text-[#1da851] py-2 px-2 rounded-xl text-xs font-bold transition-colors"
+                          >
+                            <MessageCircle size={15} /> WhatsApp
+                          </a>
+                          <Link
+                            to={`/quote?product=${encodeURIComponent(product.name)}`}
+                            className="flex items-center justify-center gap-1 bg-dark hover:bg-primary text-white py-2 px-2 rounded-xl text-xs font-bold transition-colors"
+                          >
+                            Get Quote <ArrowRight size={13} />
+                          </Link>
                         </div>
                       </div>
                     </motion.div>
@@ -422,16 +463,16 @@ const Products = () => {
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative bg-white rounded-none md:rounded-[2rem] shadow-2xl overflow-hidden w-full max-w-5xl flex flex-col md:flex-row max-h-[90vh] md:max-h-[80vh]"
+                className="relative bg-white rounded-3xl md:rounded-[2rem] shadow-2xl overflow-hidden w-full max-w-5xl flex flex-col md:flex-row max-h-[90vh] md:max-h-[80vh]"
               >
                 <button 
                   onClick={() => setQuickViewProduct(null)}
-                  className="absolute top-4 right-4 md:top-6 md:right-6 z-20 p-3 bg-white/50 backdrop-blur-md hover:bg-white text-dark rounded-full shadow-sm transition-all border border-white/50"
+                  className="absolute top-4 right-4 md:top-6 md:right-6 z-20 p-2.5 sm:p-3 bg-white/80 backdrop-blur-md hover:bg-white text-dark rounded-full shadow-sm transition-all border border-white/50"
                 >
                   <X size={20} />
                 </button>
                 
-                <div className="w-full md:w-1/2 bg-gray-50 h-64 md:h-auto shrink-0 relative overflow-hidden group">
+                <div className="w-full md:w-1/2 bg-gray-50 h-56 sm:h-64 md:h-auto shrink-0 relative overflow-hidden group">
                   <span className="absolute inset-0 flex items-center justify-center text-gray-400 text-sm animate-pulse z-0">Loading...</span>
                   {quickViewProduct.images && quickViewProduct.images[0] ? (
                     <img src={getRelativeUrl(quickViewProduct.images[0])} alt={quickViewProduct.name} className="relative z-10 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
@@ -439,54 +480,60 @@ const Products = () => {
                     <div className="relative z-10 w-full h-full flex items-center justify-center text-gray-400 bg-gray-100 font-medium">No Image Available</div>
                   )}
                   {quickViewProduct.category && (
-                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-dark uppercase tracking-[0.2em] shadow-lg border border-white/50">
+                    <div className="absolute top-4 left-4 md:top-6 md:left-6 bg-white/95 backdrop-blur-md px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold text-dark uppercase tracking-wider shadow-lg border border-white/50">
                       {quickViewProduct.category.name || 'Furniture'}
                     </div>
                   )}
                 </div>
                 
-                <div className="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col overflow-y-auto bg-white">
-                  <div className="mb-8">
-                    <h2 className="text-4xl lg:text-5xl font-heading font-bold text-dark mb-4 leading-tight">{quickViewProduct.name}</h2>
-                    <p className="text-3xl font-heading font-bold text-accent">₹{quickViewProduct.price?.toLocaleString() || 0}</p>
+                <div className="w-full md:w-1/2 p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col overflow-y-auto bg-white">
+                  <div className="mb-4 sm:mb-8">
+                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-bold text-dark mb-2 sm:mb-4 leading-tight">{quickViewProduct.name}</h2>
+                    <p className="text-2xl sm:text-3xl font-heading font-bold text-accent">₹{quickViewProduct.price?.toLocaleString() || 0}</p>
                   </div>
                   
-                  <div className="prose prose-lg text-gray-500 mb-10 max-w-none font-light leading-relaxed">
+                  <div className="prose text-gray-500 mb-6 sm:mb-10 max-w-none font-light leading-relaxed text-sm sm:text-base">
                     <p>{quickViewProduct.description}</p>
                   </div>
                   
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
                     {quickViewProduct.dimensions && (
-                      <div className="border-b border-gray-100 pb-4">
-                        <span className="block text-xs uppercase tracking-[0.2em] font-bold text-gray-400 mb-2 flex items-center gap-2">
+                      <div className="border-b border-gray-100 pb-3">
+                        <span className="block text-[11px] sm:text-xs uppercase tracking-wider font-bold text-gray-400 mb-1 flex items-center gap-2">
                           <SlidersHorizontal size={14} /> Dimensions
                         </span>
-                        <span className="text-dark font-medium">{quickViewProduct.dimensions}</span>
+                        <span className="text-dark font-medium text-sm">{quickViewProduct.dimensions}</span>
                       </div>
                     )}
                     {quickViewProduct.materials && quickViewProduct.materials.length > 0 && (
-                      <div className="border-b border-gray-100 pb-4">
-                        <span className="block text-xs uppercase tracking-[0.2em] font-bold text-gray-400 mb-2">Materials</span>
-                        <span className="text-dark font-medium">{quickViewProduct.materials.join(', ')}</span>
+                      <div className="border-b border-gray-100 pb-3">
+                        <span className="block text-[11px] sm:text-xs uppercase tracking-wider font-bold text-gray-400 mb-1">Materials</span>
+                        <span className="text-dark font-medium text-sm">{quickViewProduct.materials.join(', ')}</span>
                       </div>
                     )}
-                    <div className="border-b border-gray-100 pb-4">
-                      <span className="block text-xs uppercase tracking-[0.2em] font-bold text-gray-400 mb-2">Availability</span>
-                      <span className={`font-bold flex items-center gap-2 ${quickViewProduct.stock > 0 ? 'text-primary' : 'text-accent'}`}>
+                    <div className="border-b border-gray-100 pb-3">
+                      <span className="block text-[11px] sm:text-xs uppercase tracking-wider font-bold text-gray-400 mb-1">Availability</span>
+                      <span className={`font-bold flex items-center gap-2 text-sm ${quickViewProduct.stock > 0 ? 'text-primary' : 'text-accent'}`}>
                         <span className={`w-2 h-2 rounded-full ${quickViewProduct.stock > 0 ? 'bg-primary animate-pulse' : 'bg-accent'}`}></span>
                         {quickViewProduct.stock > 0 ? 'In Stock & Ready' : 'Made to Order'}
                       </span>
                     </div>
                   </div>
                   
-                  <div className="mt-auto pt-6 flex gap-4">
+                  <div className="mt-auto pt-4 flex flex-col sm:flex-row gap-3">
+                    <a
+                      href={`https://wa.me/918808728154?text=${encodeURIComponent(`Hello! I want to inquire about "${quickViewProduct.name}" (₹${quickViewProduct.price?.toLocaleString() || 0}) from R.S. Vishwakarma & Co.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-[#25D366] hover:bg-[#20ba59] text-white text-center py-3.5 sm:py-4 rounded-full font-bold uppercase tracking-wider text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-green-600/20 transition-all"
+                    >
+                      <MessageCircle size={18} /> Inquire on WhatsApp
+                    </a>
                     <Link 
                       to={`/quote?product=${encodeURIComponent(quickViewProduct.name)}`} 
-                      className="flex-1 bg-dark text-white text-center py-5 rounded-full font-bold tracking-[0.2em] uppercase text-sm hover:bg-accent transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-accent/20 border border-transparent hover:border-white/20 relative overflow-hidden group"
+                      className="flex-1 bg-dark text-white text-center py-3.5 sm:py-4 rounded-full font-bold uppercase tracking-wider text-xs sm:text-sm hover:bg-accent transition-all duration-300 shadow-xl flex items-center justify-center gap-2"
                     >
-                      <span className="relative z-10 flex items-center justify-center gap-2">
-                        Request a Quote <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                      </span>
+                      Request Quote <ArrowRight size={16} />
                     </Link>
                   </div>
                 </div>

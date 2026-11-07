@@ -61,28 +61,28 @@ const Quote = () => {
       <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
       <div className="absolute -bottom-32 left-1/2 w-96 h-96 bg-secondary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
 
-      <div className="container mx-auto px-6 md:px-12 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
-          <span className="inline-block py-1 px-3 rounded-full bg-accent/10 text-accent font-bold tracking-widest uppercase text-xs mb-4 border border-accent/20">
+          <span className="inline-block py-1 px-3 rounded-full bg-accent/10 text-accent font-bold tracking-widest uppercase text-xs mb-3 border border-accent/20">
             Request an Estimate
           </span>
-          <h1 className="text-4xl md:text-6xl font-heading font-bold text-dark mb-6 drop-shadow-sm">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-heading font-bold text-dark mb-4 sm:mb-6 drop-shadow-sm">
             Let's Build Something <span className="text-primary italic">Beautiful</span>
           </h1>
-          <p className="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed font-light">
+          <p className="text-gray-500 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed font-light">
             Tell us about your space and requirements. Our master craftsmen will provide a detailed estimate for your bespoke furniture within 24 hours.
           </p>
         </motion.div>
         
-        <div className="max-w-5xl mx-auto bg-white/70 backdrop-blur-2xl rounded-[3rem] shadow-2xl shadow-primary/5 overflow-hidden border border-white flex flex-col lg:flex-row">
+        <div className="max-w-5xl mx-auto bg-white/80 backdrop-blur-2xl rounded-2xl sm:rounded-3xl lg:rounded-[3rem] shadow-2xl shadow-primary/5 overflow-hidden border border-white flex flex-col lg:flex-row">
           
           {/* Left Sidebar */}
-          <div className="w-full lg:w-2/5 relative min-h-[400px] bg-dark text-white p-12 flex flex-col justify-between overflow-hidden">
+          <div className="w-full lg:w-2/5 relative min-h-[260px] sm:min-h-[350px] lg:min-h-[400px] bg-dark text-white p-6 sm:p-10 lg:p-12 flex flex-col justify-between overflow-hidden">
              {/* Background Image & Gradient */}
              <div className="absolute inset-0 z-0">
                <img src="https://images.unsplash.com/photo-1618220179428-22790b46a0eb?auto=format&fit=crop&w=1000&q=80" alt="Craftsmanship" className="w-full h-full object-cover opacity-40 mix-blend-luminosity" />
@@ -90,12 +90,12 @@ const Quote = () => {
              </div>
 
              <div className="relative z-10">
-               <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 border border-white/20">
-                 <ClipboardList size={32} className="text-accent" />
+               <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} className="w-12 h-12 sm:w-16 sm:h-16 bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-8 border border-white/20">
+                 <ClipboardList size={26} className="text-accent" />
                </motion.div>
-               <h3 className="text-3xl font-heading font-bold mb-8 leading-snug">The R.S. Vishwakarma <span className="text-accent italic">Difference</span></h3>
+               <h3 className="text-2xl sm:text-3xl font-heading font-bold mb-4 sm:mb-8 leading-snug">The R.S. Vishwakarma <span className="text-accent italic">Difference</span></h3>
                
-               <ul className="space-y-6">
+               <ul className="space-y-4 sm:space-y-6">
                  {[
                    { icon: Award, title: "Master Craftsmanship", desc: "Decades of woodworking expertise" },
                    { icon: ShieldCheck, title: "Premium Materials", desc: "Sourced for durability and beauty" },
@@ -127,7 +127,7 @@ const Quote = () => {
           </div>
 
           {/* Right Form */}
-          <div className="w-full lg:w-3/5 p-10 lg:p-14 bg-white/50">
+          <div className="w-full lg:w-3/5 p-6 sm:p-10 lg:p-14 bg-white/50">
             <AnimatePresence>
               {status === 'success' && (
                 <motion.div 

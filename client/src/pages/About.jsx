@@ -49,7 +49,7 @@ const About = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-6 drop-shadow-lg"
+            className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-4 sm:mb-6 drop-shadow-lg"
           >
             Our Legacy
           </motion.h1>
@@ -57,7 +57,7 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-gray-300 text-lg md:text-2xl max-w-2xl mx-auto font-light"
+            className="text-gray-300 text-sm sm:text-lg md:text-2xl max-w-2xl mx-auto font-light px-2"
           >
             Where traditional craftsmanship meets contemporary design to create masterpieces for your spaces.
           </motion.p>
@@ -65,9 +65,9 @@ const About = () => {
       </section>
 
       {/* The Story Section */}
-      <section className="py-24 relative z-30 bg-bg">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
+      <section className="py-16 md:py-24 relative z-30 bg-bg">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12">
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -76,7 +76,7 @@ const About = () => {
               className="w-full lg:w-1/2 relative"
             >
               <div className="absolute top-[-5%] left-[-5%] w-[40%] h-[40%] bg-accent/20 rounded-full blur-[80px] -z-10"></div>
-              <div className="aspect-[3/4] overflow-hidden rounded-[3rem] shadow-2xl relative">
+              <div className="aspect-[3/4] overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[3rem] shadow-2xl relative">
                 <img 
                   src="/master_quality.png" 
                   alt="Craftsmanship" 

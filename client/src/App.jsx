@@ -37,6 +37,7 @@ import ScrollProgress from './components/ui/ScrollProgress';
 import BackgroundGlow from './components/ui/BackgroundGlow';
 import PageTransition from './components/ui/PageTransition';
 import WhatsAppFloatingButton from './components/ui/WhatsAppFloatingButton';
+import MobileBottomBar from './components/ui/MobileBottomBar';
 
 const PageLoader = () => (
   <div className="min-h-[70vh] flex flex-col items-center justify-center gap-4">
@@ -54,7 +55,7 @@ function AppContent() {
       <ScrollProgress />
       <BackgroundGlow />
       {!isAdminRoute && <Navbar />}
-      <main className="flex-grow relative z-10">
+      <main className="flex-grow relative z-10 pb-16 md:pb-0">
         <Suspense fallback={<PageLoader />}>
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
@@ -88,6 +89,7 @@ function AppContent() {
       </main>
       {!isAdminRoute && <Footer />}
       {!isAdminRoute && <WhatsAppFloatingButton />}
+      {!isAdminRoute && <MobileBottomBar />}
     </div>
   );
 }

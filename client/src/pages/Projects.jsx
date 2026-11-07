@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MapPin, ArrowRight, X, ChevronLeft, ChevronRight, MessageCircle } from 'lucide-react';
 import TiltCard from '../components/ui/TiltCard';
 
 const getRelativeUrl = (url) => {
@@ -124,27 +124,27 @@ const Projects = () => {
   return (
     <div className="bg-bg min-h-screen">
       {/* Header */}
-      <section className="pt-32 pb-24 relative overflow-hidden">
+      <section className="pt-28 pb-14 sm:pt-32 sm:pb-24 relative overflow-hidden">
         {/* Subtle Background Elements */}
         <div className="absolute top-0 right-0 w-[50%] h-[500px] bg-gradient-to-bl from-accent/5 to-transparent rounded-bl-full pointer-events-none"></div>
         <div className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full blur-[50px] pointer-events-none"></div>
         
-        <div className="container mx-auto px-6 md:px-12 text-center relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 text-center relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-center gap-4 mb-6"
+            className="flex items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6"
           >
-            <div className="w-12 h-[1px] bg-accent"></div>
-            <h4 className="text-accent font-bold tracking-[0.2em] uppercase text-xl md:text-2xl mb-4 inline-block">Portfolio</h4>
-            <div className="w-12 h-[1px] bg-accent"></div>
+            <div className="w-8 sm:w-12 h-[1px] bg-accent"></div>
+            <h4 className="text-accent font-bold tracking-[0.2em] uppercase text-xs sm:text-base md:text-xl">Portfolio</h4>
+            <div className="w-8 sm:w-12 h-[1px] bg-accent"></div>
           </motion.div>
           
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-dark mb-8 leading-[1.1]"
+            className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-dark mb-4 sm:mb-8 leading-tight"
           >
             Architectural <br/><span className="italic font-light text-primary">Masterpieces</span>
           </motion.h1>
@@ -153,7 +153,7 @@ const Projects = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-gray-500 text-lg md:text-2xl max-w-3xl mx-auto font-light leading-relaxed"
+            className="text-gray-500 text-sm sm:text-base md:text-xl max-w-3xl mx-auto font-light leading-relaxed"
           >
             Explore our curated gallery of premium residential and commercial spaces, where our custom woodwork takes center stage.
           </motion.p>
@@ -161,16 +161,16 @@ const Projects = () => {
       </section>
 
       {/* Editorial Masonry Grid */}
-      <section className="pb-32 px-4 md:px-8">
+      <section className="pb-24 md:pb-32 px-4 md:px-8">
         <div className="container mx-auto">
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[1, 2, 3, 4].map((item) => (
-                <div key={item} className="h-[500px] bg-gray-200 animate-pulse rounded-[3rem]"></div>
+                <div key={item} className="h-[400px] bg-gray-200 animate-pulse rounded-3xl md:rounded-[3rem]"></div>
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 auto-rows-[400px] md:auto-rows-[500px]">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 md:gap-8 auto-rows-[300px] sm:auto-rows-[400px] md:auto-rows-[500px]">
               {projects.map((project, index) => {
                 // Editorial layout spanning: every 3rd item spans full width, others share half
                 const isLarge = project.span || (index % 3 === 0);
@@ -291,14 +291,25 @@ const Projects = () => {
               )}
             </div>
             
-            <div className="text-center w-full max-w-3xl">
-              <h3 className="text-3xl md:text-5xl font-heading font-bold text-white mb-4">{selectedProject.title}</h3>
+            <div className="text-center w-full max-w-3xl px-4">
+              <h3 className="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-white mb-2 sm:mb-4">{selectedProject.title}</h3>
               {selectedProject.location && (
-                <p className="text-accent uppercase tracking-widest text-sm font-bold mb-4">{selectedProject.location}</p>
+                <p className="text-accent uppercase tracking-widest text-xs sm:text-sm font-bold mb-3">{selectedProject.location}</p>
               )}
-              <p className="text-gray-300 text-base md:text-lg font-light leading-relaxed">
+              <p className="text-gray-300 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-6">
                 {selectedProject.description}
               </p>
+              
+              <div className="flex justify-center">
+                <a
+                  href={`https://wa.me/918808728154?text=${encodeURIComponent(`Hello! I saw your project "${selectedProject.title}" on your website and would like to consult with you for similar interior/furniture work.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white px-6 py-3 rounded-full text-xs sm:text-sm font-bold shadow-xl transition-all"
+                >
+                  <MessageCircle size={16} /> Discuss Similar Project on WhatsApp
+                </a>
+              </div>
             </div>
           </div>
         </div>,

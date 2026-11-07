@@ -38,6 +38,7 @@ const BeforeAfterSlider = () => {
 
   const handleTouchMove = (e) => {
     if (!isDragging) return;
+    if (e.cancelable) e.preventDefault();
     handleMove(e.touches[0].clientX);
   };
 
@@ -76,7 +77,7 @@ const BeforeAfterSlider = () => {
         <div className="flex justify-center">
           <div
             ref={containerRef}
-            className="relative w-full max-w-5xl aspect-[4/3] md:aspect-[16/9] rounded-[2.5rem] overflow-hidden shadow-2xl cursor-ew-resize group select-none bg-gray-100"
+            className="relative w-full max-w-5xl aspect-[4/3] md:aspect-[16/9] rounded-2xl sm:rounded-[2.5rem] overflow-hidden shadow-2xl cursor-ew-resize group select-none bg-gray-100 touch-none"
             onMouseDown={(e) => {
               setIsDragging(true);
               handleMove(e.clientX);
@@ -93,7 +94,7 @@ const BeforeAfterSlider = () => {
               className="absolute inset-0 w-full h-full object-cover"
               draggable="false"
             />
-            <div className="absolute top-6 right-6 md:top-8 md:right-8 bg-accent/90 backdrop-blur-md text-white px-5 py-2 rounded-full text-xs md:text-sm font-bold tracking-widest uppercase shadow-lg">
+            <div className="absolute top-3 right-3 sm:top-6 sm:right-6 md:top-8 md:right-8 bg-accent/90 backdrop-blur-md text-white px-3 py-1 sm:px-5 sm:py-2 rounded-full text-[10px] sm:text-xs md:text-sm font-bold tracking-widest uppercase shadow-lg">
               After (Finished)
             </div>
 
@@ -108,7 +109,7 @@ const BeforeAfterSlider = () => {
                 className="absolute inset-0 w-full h-full object-cover filter contrast-90 brightness-95"
                 draggable="false"
               />
-              <div className="absolute top-6 left-6 md:top-8 md:left-8 bg-dark/80 backdrop-blur-md text-white px-5 py-2 rounded-full text-xs md:text-sm font-bold tracking-widest uppercase shadow-lg">
+              <div className="absolute top-3 left-3 sm:top-6 sm:left-6 md:top-8 md:left-8 bg-dark/80 backdrop-blur-md text-white px-3 py-1 sm:px-5 sm:py-2 rounded-full text-[10px] sm:text-xs md:text-sm font-bold tracking-widest uppercase shadow-lg">
                 Before (Raw Site)
               </div>
             </div>

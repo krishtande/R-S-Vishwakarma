@@ -79,8 +79,8 @@ const Navbar = () => {
     <nav className={`fixed w-full z-50 transition-all duration-500 ${isSolid ? 'bg-white/70 backdrop-blur-xl shadow-lg shadow-gray-200/20 py-4 border-b border-white/50' : 'bg-gradient-to-b from-dark/60 to-transparent py-6'}`}>
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className={`text-2xl md:text-3xl font-heading font-bold flex items-center gap-2 transition-colors duration-300 ${isSolid ? 'text-primary' : 'text-white drop-shadow-md'}`}>
-          <span>R. S. Vishwakarma & Company</span>
+        <Link to="/" className={`font-heading font-bold flex items-center gap-2 transition-colors duration-300 ${isSolid ? 'text-primary' : 'text-white drop-shadow-md'}`}>
+          <span className="text-xl sm:text-2xl md:text-3xl tracking-tight">R. S. Vishwakarma & Co.</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -215,22 +215,101 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white shadow-lg overflow-hidden"
+            className="md:hidden bg-white shadow-2xl border-t border-gray-100 overflow-hidden max-h-[85vh] overflow-y-auto"
           >
-            <div className="flex flex-col px-6 py-4 gap-4">
-              {navLinks.map((link) => (
+            <div className="flex flex-col px-6 py-5 gap-4">
+              {/* Mobile Search Input */}
+              <form onSubmit={(e) => { handleSearchSubmit(e); setIsOpen(false); }} className="relative w-full">
+                <input 
+                  type="text"
+                  placeholder="Search furniture (e.g. Sofa, Bed)..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-11 pr-4 py-3 text-sm rounded-xl bg-gray-50 border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary text-dark"
+                  autoComplete="off"
+                />
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+              </form>
+
+              {/* Quick Categories */}
+              <div>
+                <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2">Popular Collections</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {[
+                    { label: '🛋️ Sofas', kw: 'sofa' },
+                    { label: '🛏️ Beds', kw: 'bed' },
+                    { label: '🍳 Kitchens', kw: 'kitchen' },
+                    { label: '💼 Office', kw: 'office' },
+                    { label: '🍽️ Dining', kw: 'dining' }
+                  ].map((cat) => (
+                    <button
+                      key={cat.kw}
+                      type="button"
+                      onClick={() => {
+                        navigate(`/products?keyword=${cat.kw}`);
+                        setIsOpen(false);
+                      }}
+                      className="px-3 py-1.5 text-xs font-medium bg-gray-100 hover:bg-primary hover:text-white rounded-full transition-colors text-gray-700"
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Navigation Links */}
+              <div className="border-t border-gray-100 pt-2 space-y-1">
+                {navLinks.map((link) => {
+                  const isActive = location.pathname === link.path;
+                  return (
+                    <Link 
+                      key={link.name} 
+                      to={link.path} 
+                      onClick={() => setIsOpen(false)}
+                      className={`flex items-center justify-between text-base font-semibold py-2.5 px-3 rounded-xl transition-colors ${
+                        isActive ? 'bg-primary/10 text-primary' : 'text-gray-800 hover:bg-gray-50'
+                      }`}
+                    >
+                      <span>{link.name}</span>
+                      {isActive && <span className="w-2 h-2 rounded-full bg-primary"></span>}
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* Mobile Quick Action Buttons */}
+              <div className="border-t border-gray-100 pt-3 space-y-2">
+                <div className="grid grid-cols-2 gap-2">
+                  <a
+                    href="tel:+918808728154"
+                    className="flex items-center justify-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-700 py-2.5 px-3 rounded-xl text-xs font-bold transition-colors"
+                  >
+                    <Phone size={14} /> Call Now
+                  </a>
+                  <a
+                    href={`https://wa.me/918808728154?text=${encodeURIComponent('Hello R.S. Vishwakarma & Company! I want to discuss a project.')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-[#1da851] py-2.5 px-3 rounded-xl text-xs font-bold transition-colors"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-[#25D366]"></span> WhatsApp
+                  </a>
+                </div>
+
                 <Link 
-                  key={link.name} 
-                  to={link.path} 
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium text-text border-b border-gray-100 pb-2"
+                  to="/quote" 
+                  onClick={() => setIsOpen(false)} 
+                  className="block bg-primary text-white text-center py-3 rounded-xl text-sm font-bold shadow-md shadow-primary/20 hover:bg-dark transition-colors"
                 >
-                  {link.name}
+                  Request Free Estimate
                 </Link>
-              ))}
-              <Link to="/quote" onClick={() => setIsOpen(false)} className="bg-primary text-white text-center py-3 rounded-md mt-2 font-medium">
-                Get Quote
-              </Link>
+              </div>
+
+              {/* Location Tag */}
+              <div className="bg-gray-50 rounded-xl p-3 text-[11px] text-gray-500 flex items-start gap-2">
+                <MapPin size={14} className="text-accent mt-0.5 shrink-0" />
+                <span>Ahmedabad & Zundal Workshop | Serving Gujarat & across India</span>
+              </div>
             </div>
           </motion.div>
         )}
