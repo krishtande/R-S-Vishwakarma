@@ -6,6 +6,11 @@ mongoose.set('bufferCommands', false);
 export const isDbConnected = () => mongoose.connection.readyState === 1;
 
 const connectDB = async () => {
+    if (!process.env.MONGODB_URI) {
+        console.warn('MongoDB Notice: MONGODB_URI not provided. Running server with built-in in-memory dataset.');
+        return;
+    }
+
     try {
         const conn = await mongoose.connect(process.env.MONGODB_URI, { 
             serverSelectionTimeoutMS: 2000,

@@ -35,14 +35,13 @@ const app = express();
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Security Middlewares
-// In production, we disable Helmet's CSP temporarily or configure it strictly to allow React to work out of the box with external assets like Cloudinary
 app.use(helmet({ contentSecurityPolicy: false }));
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+app.use(cors({ origin: process.env.FRONTEND_URL || true, credentials: true }));
 
 // Rate Limiting
 const limiter = rateLimit({
     windowMs: 10 * 60 * 1000, // 10 mins
-    max: 100 // 100 requests per 10 mins
+    max: 200 // 200 requests per 10 mins
 });
 app.use('/api', limiter);
 
@@ -67,9 +66,13 @@ app.use('/api/blogs', blogRoutes);
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
 
-    app.get('*', (req, res) =>
-        res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'))
-    );
+    // Express 5 compatible SPA wildcard handler
+    app.use((req, res, next) => {
+        if (req.method === 'GET' && !req.path.startsWith('/api') && !req.path.startsWith('/uploads')) {
+            return res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+        }
+        next();
+    });
 } else {
     // Basic Route for development
     app.get('/', (req, res) => {
@@ -85,6 +88,6 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 });
