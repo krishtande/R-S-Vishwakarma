@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, CheckCircle2, MessageCircle, Building } from 'lucide-react';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [status, setStatus] = useState(''); // 'idle' | 'loading' | 'success' | 'error'
 
   const handleSubmit = async (e) => {
@@ -18,7 +18,7 @@ const Contact = () => {
       const data = await res.json();
       if (data.success) {
         setStatus('success');
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', message: '' });
         setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('error');
@@ -116,7 +116,7 @@ const Contact = () => {
 
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="md:col-span-2">
+                <div>
                   <label className="block text-sm font-bold text-dark mb-3 tracking-wide">Full Name</label>
                   <input 
                     type="text" 
@@ -125,6 +125,16 @@ const Contact = () => {
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                     className="w-full px-6 py-4 bg-bg/50 border border-white focus:bg-white focus:outline-none focus:border-accent focus:ring-4 focus:ring-accent/10 rounded-2xl transition-all shadow-sm" 
                     placeholder="John Doe" 
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-dark mb-3 tracking-wide">Phone Number</label>
+                  <input 
+                    type="tel" 
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="w-full px-6 py-4 bg-bg/50 border border-white focus:bg-white focus:outline-none focus:border-accent focus:ring-4 focus:ring-accent/10 rounded-2xl transition-all shadow-sm" 
+                    placeholder="+91 98765 43210" 
                   />
                 </div>
               </div>

@@ -74,9 +74,9 @@ const Blogs = () => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="relative h-64 overflow-hidden">
-                  {blog.coverImage ? (
+                  {(blog.coverImage || blog.image) ? (
                     <img 
-                      src={blog.coverImage} 
+                      src={blog.coverImage || blog.image} 
                       alt={blog.title} 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                     />

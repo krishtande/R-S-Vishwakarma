@@ -17,6 +17,7 @@ import transformationRoutes from './routes/transformationRoutes.js';
 import employeeRoutes from './routes/employeeRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 // Load env vars
@@ -62,14 +63,17 @@ app.use('/api/transformations', transformationRoutes);
 app.use('/api/employees', employeeRoutes);
 app.use('/api/blogs', blogRoutes);
 
-// Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
+// Serve frontend in production or if build exists
+const clientDistPath = path.resolve(__dirname, '../client/dist');
+const hasBuiltFrontend = fs.existsSync(path.join(clientDistPath, 'index.html'));
+
+if (process.env.NODE_ENV === 'production' || hasBuiltFrontend) {
+    app.use(express.static(clientDistPath));
 
     // Express 5 compatible SPA wildcard handler
     app.use((req, res, next) => {
         if (req.method === 'GET' && !req.path.startsWith('/api') && !req.path.startsWith('/uploads')) {
-            return res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+            return res.sendFile(path.join(clientDistPath, 'index.html'));
         }
         next();
     });

@@ -117,10 +117,10 @@ const BlogDetails = () => {
         </header>
 
         {/* Cover Image */}
-        {blog.coverImage && (
+        {(blog.coverImage || blog.image) && (
           <div className="rounded-3xl overflow-hidden shadow-lg mb-12 bg-white">
             <img 
-              src={blog.coverImage} 
+              src={blog.coverImage || blog.image} 
               alt={blog.title} 
               className="w-full h-auto max-h-[600px] object-cover"
             />

@@ -34,11 +34,11 @@ const Footer = () => {
         <div>
           <h4 className="text-xl font-heading mb-6">Categories</h4>
           <ul className="space-y-3 text-gray-400">
-            <li><Link to="/products?category=living" className="hover:text-accent transition-colors">Living Room</Link></li>
-            <li><Link to="/products?category=bedroom" className="hover:text-accent transition-colors">Bedroom</Link></li>
-            <li><Link to="/products?category=dining" className="hover:text-accent transition-colors">Dining</Link></li>
-            <li><Link to="/products?category=office" className="hover:text-accent transition-colors">Office Space</Link></li>
-            <li><Link to="/products?category=kitchen" className="hover:text-accent transition-colors">Modular Kitchens</Link></li>
+            <li><Link to="/products?keyword=sofa" className="hover:text-accent transition-colors">Sofas & Couches</Link></li>
+            <li><Link to="/products?keyword=bed" className="hover:text-accent transition-colors">Beds & Wardrobes</Link></li>
+            <li><Link to="/products?keyword=dining" className="hover:text-accent transition-colors">Dining Tables</Link></li>
+            <li><Link to="/products?keyword=desk" className="hover:text-accent transition-colors">Office & Desks</Link></li>
+            <li><Link to="/products?keyword=chair" className="hover:text-accent transition-colors">Chairs & Seating</Link></li>
           </ul>
         </div>
 
