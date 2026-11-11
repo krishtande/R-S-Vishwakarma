@@ -75,3 +75,4 @@ const MobileBottomBar = () => {
 };
 
 export default MobileBottomBar;
+

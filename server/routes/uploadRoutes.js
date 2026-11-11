@@ -13,11 +13,9 @@ router.post('/', protect, admin, upload.single('image'), async (req, res) => {
             return res.status(400).json({ success: false, message: 'No image uploaded' });
         }
 
-        const backendUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5000';
-        
         res.json({
             success: true,
-            url: `${backendUrl}/uploads/${req.file.filename}`
+            url: `/uploads/${req.file.filename}`
         });
     } catch (error) {
         console.error(error);
@@ -31,11 +29,7 @@ router.post('/multiple', protect, admin, upload.array('images', 20), async (req,
             return res.status(400).json({ success: false, message: 'No images uploaded' });
         }
 
-        const backendUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5000';
-
-        const urls = req.files.map(file => {
-            return `${backendUrl}/uploads/${file.filename}`;
-        });
+        const urls = req.files.map(file => `/uploads/${file.filename}`);
 
         res.json({
             success: true,

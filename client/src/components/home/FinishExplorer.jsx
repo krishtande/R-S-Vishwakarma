@@ -30,7 +30,7 @@ const FinishExplorer = () => {
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, amount: 0.05 }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               className="group relative h-[350px] rounded-3xl overflow-hidden shadow-lg cursor-pointer"
             >

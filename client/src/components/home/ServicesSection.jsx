@@ -85,7 +85,7 @@ const ServicesSection = () => {
               variants={fadeUpVariant}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, amount: 0.05 }}
               transition={{ delay: (index % 4) * 0.1, duration: 0.6 }}
               className="bg-white p-5 sm:p-8 rounded-2xl sm:rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 group relative overflow-hidden"
             >

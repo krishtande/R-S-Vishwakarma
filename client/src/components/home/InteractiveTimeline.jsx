@@ -31,7 +31,7 @@ const InteractiveTimeline = () => {
                 key={step.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, amount: 0.05 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="relative flex flex-col items-center text-center group"
               >

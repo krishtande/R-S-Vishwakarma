@@ -111,19 +111,19 @@ const Home = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.6 }}
               className="w-full lg:w-1/2 relative"
             >
-              <div className="aspect-[4/5] overflow-hidden rounded-[3rem] shadow-2xl relative">
+              <div className="aspect-[4/5] overflow-hidden rounded-[2rem] md:rounded-[3rem] shadow-2xl relative">
                 <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80" alt="Workshop" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent"></div>
               </div>
               <motion.div 
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
                 className="absolute -bottom-10 -right-10 bg-white/90 backdrop-blur-md p-10 rounded-[2.5rem] shadow-2xl hidden md:block border border-white"
               >
                 <span className="block text-6xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary mb-2">20+</span>
@@ -132,15 +132,15 @@ const Home = () => {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.6 }}
               className="w-full lg:w-1/2"
             >
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-16 h-[1px] bg-accent"></div>
-                <h4 className="text-accent font-bold tracking-[0.2em] uppercase text-xl md:text-2xl mb-4 inline-block">Section</h4>
+              <div className="flex items-center gap-4 mb-4 sm:mb-8">
+                <div className="w-12 sm:w-16 h-[1px] bg-accent"></div>
+                <h4 className="text-accent font-bold tracking-[0.2em] uppercase text-sm sm:text-xl md:text-2xl inline-block">Our Story</h4>
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-7xl font-heading font-bold text-dark mb-8 leading-[1.1]">
                 Where Craftsmanship<br/><span className="italic font-light text-primary">Meets Elegance</span>
@@ -192,10 +192,10 @@ const Home = () => {
             ]).map((product, index) => (
               <motion.div
                 key={product._id}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: index * 0.1, duration: 0.8 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
                 className="group relative bg-bg rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700"
               >
                 <div className="relative h-[400px] overflow-hidden">

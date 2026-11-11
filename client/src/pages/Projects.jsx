@@ -180,7 +180,7 @@ const Projects = () => {
                     <motion.div 
                       initial={{ opacity: 0, y: 50 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true, amount: 0.05 }}
                       transition={{ duration: 0.8 }}
                       onClick={() => openProjectModal(project)}
                       className="relative overflow-hidden rounded-[2rem] md:rounded-[3rem] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-700 w-full h-full"

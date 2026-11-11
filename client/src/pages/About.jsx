@@ -69,10 +69,10 @@ const About = () => {
         <div className="container mx-auto px-4 sm:px-6 md:px-12">
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
             <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.6 }}
               className="w-full lg:w-1/2 relative"
             >
               <div className="absolute top-[-5%] left-[-5%] w-[40%] h-[40%] bg-accent/20 rounded-full blur-[80px] -z-10"></div>
@@ -96,17 +96,17 @@ const About = () => {
             </motion.div>
             
             <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.6 }}
               className="w-full lg:w-1/2"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-[2px] bg-accent"></div>
-                <h4 className="text-accent font-bold tracking-widest uppercase text-2xl md:text-3xl inline-block">Our Heritage</h4>
+                <h4 className="text-accent font-bold tracking-widest uppercase text-lg sm:text-2xl md:text-3xl inline-block">Our Heritage</h4>
               </div>
-              <h2 className="text-5xl md:text-6xl font-heading font-bold text-white mb-8 leading-tight">
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-heading font-bold text-dark mb-6 sm:mb-8 leading-tight">
                 Forged in Tradition, Built for Tomorrow
               </h2>
               <div className="space-y-6 text-lg text-gray-600 font-light">

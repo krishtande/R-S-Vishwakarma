@@ -39,6 +39,11 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors({ origin: process.env.FRONTEND_URL || true, credentials: true }));
 
+// Health check endpoint (for Render / UptimeRobot keep-alive pings)
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ success: true, status: 'ok', uptime: Math.round(process.uptime()) });
+});
+
 // Rate Limiting
 const limiter = rateLimit({
     windowMs: 10 * 60 * 1000, // 10 mins
